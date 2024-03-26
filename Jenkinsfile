@@ -14,11 +14,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    def is_deploy = input(message: 'Deploy?', parameters: [choice(choices: ['Yes', 'No'])])
-                    if (is_deploy == 'Yes') {
+                    def user_input = input(message: 'Deploy?', parameters: [choice(name: 'DEPLOY', choices: ['Deploy', 'Abort'])])
+                    if (user_input == 'Deploy') {
                         sh 'docker-compose up -d'
                     }
-                }
+                }  
             }          
         }        
     }
